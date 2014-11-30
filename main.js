@@ -1,6 +1,11 @@
+//create a score variable
+var score = 0;
+var scoreText;
+
 //Define the main state
 
 var main = {
+
   preload: function(){
     //This function will be executed at the beginning
       //That's where we load the game's assets
@@ -8,13 +13,18 @@ var main = {
     game.load.image('paddle', 'assets/paddle.png');
 
     //Load the brick sprite
-    game.load.image('brick', 'assets/brick.png');
+    //replace the brick image with cat image
+    game.load.image('brick', 'assets/cat.png');
 
     //Load the ball sprite
     game.load.image('ball', 'assets/ball.png');
 
     //Load the lava sprite
     game.load.image('lava', 'assets/lava.png');
+
+    //Load the background image
+    game.load.image('background', 'assets/stars.jpg');
+
   },
 
   create: function(){
@@ -23,6 +33,12 @@ var main = {
 
     //Initialize the physics system of the game
     game.physics.startSystem(Phaser.Physics.ARCADE);
+
+    //create the background image
+    game.add.tileSprite(0, 0, 1000, 600, 'background')
+
+    //Create the initial score text
+    scoreText = game.add.text(50, 20, 'score: 0', {font: '20px Arial', fill: 'orange', align: 'left'});
 
     //Create a variable to handle the arrow keys
     this.cursor = game.input.keyboard.createCursorKeys();
@@ -50,7 +66,7 @@ var main = {
     this.bricks.enableBody = true;
 
     //Create the bricks
-    for (var i=0; i<5; i++)
+    for (var i=0; i<10; i++)
       for (var j=0; j<5; j++)
         game.add.sprite(55+i*60, 55+j*35, 'brick', 0, this.bricks);
 
@@ -58,7 +74,7 @@ var main = {
     this.bricks.setAll('body.immovable', true);
 
     //create the ball with physics
-    this.ball = game.add.sprite(200, 300, 'ball');
+    this.ball = game.add.sprite(100, 100, 'ball');
     game.physics.arcade.enable(this.ball);
 
     //add velocity to the ball
@@ -103,6 +119,10 @@ var main = {
   hit: function(ball, brick){
     //when the ball hits a brick, kill the brick
     brick.kill();
+
+    //when a brick is hit, increase score
+    score += 10;
+    scoreText.text = 'score: ' + score;
   },
 
   death: function(ball, lava){
@@ -112,6 +132,6 @@ var main = {
 };
 
 //Initialize phaser and start our main state
-var game = new Phaser.Game(400, 450, Phaser.AUTO, 'gameDiv');
+var game = new Phaser.Game(700, 450, Phaser.AUTO, 'gameDiv');
 game.state.add('main', main);
 game.state.start('main');
