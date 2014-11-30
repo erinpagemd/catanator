@@ -74,7 +74,7 @@ var main = {
     this.bricks.setAll('body.immovable', true);
 
     //create the ball with physics
-    this.ball = game.add.sprite(100, 100, 'ball');
+    this.ball = game.add.sprite(100, 300, 'ball');
     game.physics.arcade.enable(this.ball);
 
     //add velocity to the ball
