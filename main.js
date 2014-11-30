@@ -17,7 +17,7 @@ var main = {
     game.load.image('brick', 'assets/cat.png');
 
     //Load the ball sprite
-    game.load.image('ball', 'assets/ball.png');
+    game.load.image('ball', 'assets/colorball.png');
 
     //Load the lava sprite
     game.load.image('lava', 'assets/lava.png');
