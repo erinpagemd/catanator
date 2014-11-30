@@ -35,7 +35,7 @@ var main = {
     game.physics.startSystem(Phaser.Physics.ARCADE);
 
     //create the background image
-    game.add.tileSprite(0, 0, 1000, 600, 'background')
+    game.add.tileSprite(0, 0, 700, 450, 'background')
 
     //Create the initial score text
     scoreText = game.add.text(50, 20, 'score: 0', {font: '20px Arial', fill: 'orange', align: 'left'});
